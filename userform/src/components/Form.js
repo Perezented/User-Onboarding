@@ -37,13 +37,13 @@ export default function Form() {
         yup.reach(formSchema, e.target.name)
             .validate(e.target.value)
             .then(valid => {
-                setErrors({
+                setError({
                     ...error,
                     [e.target.name]: ""
                 });
             })
             .catch(err => {
-                setErrors({
+                setError({
                     ...error,
                     [e.target.name]: err.errors[0]
                 });
