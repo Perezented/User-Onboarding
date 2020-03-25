@@ -7,7 +7,7 @@ const formSchema = yup.object().shape({
     email: yup
         .string()
         .email()
-        .required(),
+        .required("Email is required"),
     terms: yup.boolean().oneOf([true], "Need to read and accept the terms"),
     password: yup.string().required("Password is required")
 });
@@ -82,7 +82,7 @@ export default function Form() {
     };
 
     return (
-        <form>
+        <form onSubmit={formSubmit}>
             <label htmlFor="name">
                 Name:
                 <input
@@ -91,7 +91,10 @@ export default function Form() {
                     name="name"
                     value={formState.name}
                     onChange={inputChange}
-                />
+                />{" "}
+                {error.name.length > 0 ? (
+                    <p className="error">{error.name}</p>
+                ) : null}
             </label>
             <label htmlFor="name">
                 Email:
@@ -103,6 +106,9 @@ export default function Form() {
                     value={formState.email}
                     onChange={inputChange}
                 />
+                {error.email.length > 0 ? (
+                    <p className="error">{error.email}</p>
+                ) : null}
             </label>
             <label>
                 Password:
@@ -113,6 +119,9 @@ export default function Form() {
                     onChange={inputChange}
                     value={formState.password}
                 />
+                {error.password.length > 0 ? (
+                    <p className="error">{error.password}</p>
+                ) : null}
             </label>
             <label>
                 <input
