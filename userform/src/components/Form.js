@@ -18,6 +18,12 @@ export default function Form() {
         password: "",
         terms: ""
     });
+    const [error, setError] = useState({
+        name: "",
+        email: "",
+        password: "",
+        terms: ""
+    });
     const [post, setPost] = useState([]);
     const [greyButton, setButtonOn] = useState(true);
     useEffect(() => {
@@ -32,13 +38,13 @@ export default function Form() {
             .validate(e.target.value)
             .then(valid => {
                 setErrors({
-                    ...errors,
+                    ...error,
                     [e.target.name]: ""
                 });
             })
             .catch(err => {
                 setErrors({
-                    ...errors,
+                    ...error,
                     [e.target.name]: err.errors[0]
                 });
             });
@@ -53,4 +59,42 @@ export default function Form() {
                 console.log("success", post);
 
                 setFormState({
-    
+                    name: "",
+                    email: "",
+                    password: "",
+                    terms: ""
+                });
+            })
+            .catch(err => {
+                console.log(err.res);
+            });
+    };
+
+    return (
+        <form>
+            <label htmlFor="name">
+                Name:
+                <input type="text" name="name" />{" "}
+            </label>
+            <label htmlFor="name">
+                Email:
+                <input
+                    type="text"
+                    name="email"
+                    placeholder="example@email.com"
+                />
+            </label>
+            <label>
+                Password:
+                <input type="password" name="password" />
+            </label>
+            <label>
+                <input type="checkbox" name="terms" />
+                Terms and Conditions
+            </label>
+            <pre>{JSON.stringify(post, null, 2)}</pre>
+
+            <button disabled={greyButton}>Submit</button>
+        </form>
+    );
+}
