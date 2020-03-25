@@ -85,22 +85,42 @@ export default function Form() {
         <form>
             <label htmlFor="name">
                 Name:
-                <input type="text" name="name" />{" "}
+                <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={formState.name}
+                    onChange={inputChange}
+                />
             </label>
             <label htmlFor="name">
                 Email:
                 <input
+                    id="email"
                     type="text"
                     name="email"
                     placeholder="example@email.com"
+                    value={formState.email}
+                    onChange={inputChange}
                 />
             </label>
             <label>
                 Password:
-                <input type="password" name="password" />
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    onChange={inputChange}
+                    value={formState.password}
+                />
             </label>
             <label>
-                <input type="checkbox" name="terms" />
+                <input
+                    type="checkbox"
+                    name="terms"
+                    onChange={inputChange}
+                    value={formState.terms}
+                />
                 Terms and Conditions
             </label>
             <pre>{JSON.stringify(post, null, 2)}</pre>
