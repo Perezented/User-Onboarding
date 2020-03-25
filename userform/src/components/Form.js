@@ -32,20 +32,19 @@ export default function Form() {
         });
     }, [formState]);
 
-    const validateChange = e => {
-        //12
-        yup.reach(formSchema, e.target.name)
-            .validate(e.target.value)
+    const validateChange = event => {
+        yup.reach(formSchema, event.target.name)
+            .validate(event.target.value)
             .then(valid => {
                 setError({
                     ...error,
-                    [e.target.name]: ""
+                    [event.target.name]: ""
                 });
             })
             .catch(err => {
                 setError({
                     ...error,
-                    [e.target.name]: err.errors[0]
+                    [event.target.name]: err.errors[0]
                 });
             });
     };
@@ -68,6 +67,18 @@ export default function Form() {
             .catch(err => {
                 console.log(err.res);
             });
+    };
+    const inputChange = event => {
+        event.persist();
+        const newerFormData = {
+            ...formState,
+            [event.target.name]:
+                event.target.type === "checkbox"
+                    ? event.target.checked
+                    : event.target.value
+        };
+        validateChange(event);
+        setFormState(newerFormData);
     };
 
     return (
