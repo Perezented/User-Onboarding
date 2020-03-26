@@ -1,12 +1,11 @@
-import { isMainThread } from "worker_threads";
-
 describe("A test for User Forms Project", function() {
-    beforeEch(function() {
-        cy.visit("https://localhost:3000/");
+    it("Visiting the react app", function() {
+        cy.visit("http://localhost:3000/");
     });
-    isMainThread("Add test to inputs and submit this form", function() {
+    it("Add test to inputs and submit this form", function() {
         //name
         cy.get(`input[id='name']`)
+
             .type("Michael Perez")
             .should("have.value", "Michael Perez");
         //email
@@ -15,11 +14,12 @@ describe("A test for User Forms Project", function() {
             .should("have.value", "mperez@gmail.com");
         //password
         cy.get(`input[id='password']`)
-            .type("")
-            .should("have.value", "Michael Perez");
+            .type("password")
+            .should("have.value", "password");
         //terms
         cy.get(`[type='checkbox']`)
-            .type("Michael Perez")
-            .should("have.value", "Michael Perez");
+            .check()
+            .should("be.checked"); //button
+        cy.get("button").click();
     });
 });

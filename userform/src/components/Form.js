@@ -89,6 +89,7 @@ export default function Form() {
                     id="name"
                     type="text"
                     name="name"
+                    placeholder="firstName lastName"
                     value={formState.name}
                     onChange={inputChange}
                 />{" "}
@@ -96,6 +97,7 @@ export default function Form() {
                     <p className="error">{error.name}</p>
                 ) : null}
             </label>
+            <br />
             <label htmlFor="name">
                 Email:
                 <input
@@ -110,12 +112,14 @@ export default function Form() {
                     <p className="error">{error.email}</p>
                 ) : null}
             </label>
+            <br />
             <label>
                 Password:
                 <input
                     id="password"
                     type="password"
                     name="password"
+                    placeholder="Password"
                     onChange={inputChange}
                     value={formState.password}
                 />
@@ -123,6 +127,7 @@ export default function Form() {
                     <p className="error">{error.password}</p>
                 ) : null}
             </label>
+            <br />
             <label>
                 <input
                     type="checkbox"
@@ -132,6 +137,7 @@ export default function Form() {
                 />
                 Terms and Conditions
             </label>
+            <br />
             <pre>{JSON.stringify(post, null, 2)}</pre>
 
             <button disabled={greyButton}>Submit</button>
